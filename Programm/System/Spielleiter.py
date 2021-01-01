@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf 8 -*-
 from .Spieler import Spieler
+from .Würfel import Würfel
 
 
 class Spielleiter:
@@ -10,6 +11,7 @@ class Spielleiter:
         self.setUp()
 
     def setUp(self):
+        # Spieler definieren
         print("Willkommen zu Monopoly im Terminal. \n "
               "Dieses Spiel können 2-4 Spieler mit einer Tastatur spielen. \n")
         anzahl = input("Wie viele Spieler werden spielen?\n")
@@ -27,3 +29,11 @@ class Spielleiter:
         for spieler in neueSpieler:
             print(spieler.name)
         self.spieler = neueSpieler
+
+        # Reihenfolge bestimmen
+        print("Um die Reihenfolge zu bestimmen wird für jeden Spieler gewürfelt")
+        würfel = Würfel()
+        for s in self.spieler:
+            wurf = würfel.würfeln()
+            print(wurf)
+
