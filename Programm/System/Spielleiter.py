@@ -1,6 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf 8 -*-
 from .Spieler import Spieler
 
+
 class Spielleiter:
+    spieler = []
+
     def __init__(self):
         self.setUp()
 
@@ -12,8 +17,13 @@ class Spielleiter:
             anzahl = input("Die Spielerzahl muss zwischen 2 und vier liegen, bitte nocheinmal die Anzahl angeben.\n")
         i = 1
         neueSpieler = []
-        while i<=int(anzahl):
+        while i <= int(anzahl):
             name = input("Wie heißt Spieler " + str(i) + "\n")
+            print(name)
             neueSpieler.append(Spieler(name))
-            print("Spieler " + str(i) + " heißt nun " + neueSpieler[i-1].name)
+            print("Spieler " + str(i) + " heißt nun " + neueSpieler[i - 1].name)
             i += 1
+        print("Die Spieler sind also: ")
+        for spieler in neueSpieler:
+            print(spieler.name)
+        self.spieler = neueSpieler
