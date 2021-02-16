@@ -57,7 +57,9 @@ class Darsteller:
             eingabe = input("Ungültige Eingabe, bitte noch einmal eingeben.\n")
         return
 
-    def karteZeichnen(self, spieler):
+    def karteZeichnen(self, spieler, wurf, geradeDran):
+        if wurf is not None:
+            print(geradeDran.name + " (" + geradeDran.symbol + ") hat " + str(wurf[0]) + ", " + str(wurf[1]) + " gewürfelt.")
         t = PrettyTable(["Feld", "Spieler"])
         for feld in Felder:
             #print(feld.name, end=' ')
