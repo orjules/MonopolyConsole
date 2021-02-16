@@ -6,10 +6,11 @@ from .Felder import Felder
 
 class Spieler:
     name = None
+    symbol = None
     aktuellePosition = Felder.Los
-    istImGefängnis = False
+    istImGefaengnis = False
     kapital = 1500
-    grundStücke = None
 
-    def __init__(self, name):
+    def __init__(self, name, symbol):
         self.name = name
+        self.symbol = symbol

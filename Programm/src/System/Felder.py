@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf 8 -*-
+# coding=utf-8
 import enum
 
 
@@ -9,9 +10,9 @@ class Felder(enum.Enum):
     Gemeinschaftsfeld1 = 3
     Turmstrasse = 4
     Einkommensteuer = 5
-    Südbahnhof = 6
+    Suedbahnhof = 6
     Chaussestrasse = 7
     Ereignisfeld1 = 8
     Elisenstrasse = 9
     Poststrasse = 10
-    GefängnisBzwZuBesuch = 11
+    GefaengnisBzwZuBesuch = 11

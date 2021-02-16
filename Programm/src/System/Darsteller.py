@@ -2,7 +2,9 @@
 # -*- coding: utf 8 -*-
 
 from .Spieler import Spieler
-from .Würfel import würfeln
+from .Wuerfel import wuerfeln
+from .Felder import Felder
+from prettytable import PrettyTable
 
 class Darsteller:
 
@@ -18,21 +20,21 @@ class Darsteller:
             name = input("Wie heißt Spieler " + str(i) + "\n")
 
             # Würfeln um später zu sortieren
-            wurf = würfeln()
+            wurf = wuerfeln()
             ergebnis = wurf[0] + wurf[1]
             istKeinDuplikat = True
-            anzahlGewürfelt = 1
+            anzahlGewuerfelt = 1
             while istKeinDuplikat:
                 if ergebnis in neueSpieler.values():
-                    wurf = würfeln()
+                    wurf = wuerfeln()
                     ergebnis = wurf[0] + wurf[1]
-                    anzahlGewürfelt += 1
+                    anzahlGewuerfelt += 1
                 else:
                     istKeinDuplikat = False
 
             # Spieler und Wert speichern
             neueSpieler[Spieler(name)] = ergebnis
-            print("Spieler " + str(i) + " heißt jetzt " + name + " und hat " + str(anzahlGewürfelt) +
+            print("Spieler " + str(i) + " heißt jetzt " + name + " und hat " + str(anzahlGewuerfelt) +
                   " mal gewürfelt und eine " + str(ergebnis) + " für die Reihenfolge bekommen.\n")
             i += 1
 
@@ -54,3 +56,15 @@ class Darsteller:
                     return eingabe
             eingabe = input("Ungültige Eingabe, bitte noch einmal eingeben.\n")
         return
+
+    def karteZeichnen(self, spieler):
+        t = PrettyTable(["Feld", "Spieler"])
+        for feld in Felder:
+            #print(feld.name, end=' ')
+            spielfiguren = []
+            for spielr in spieler:
+                if feld is spielr.aktuellePosition:
+                    #print(spielr.symbol, end=' ')
+                    spielfiguren.append(spielr.symbol)
+            t.add_row([feld.name, ", ".join(spielfiguren)])
+        print(t)
