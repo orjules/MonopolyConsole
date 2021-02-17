@@ -58,22 +58,22 @@ class Darsteller:
             eingabe = input("Ungültige Eingabe, bitte noch einmal eingeben.\n")
         return
 
-    def karteZeichnen(self, spieler, wurf, geradeDran):
+    def spielerHatGewürfelt(self, wurf, geradeDran):
         if wurf is not None:
             print(geradeDran.name + " (" + geradeDran.symbol + ") hat " + str(wurf[0]) + ", " + str(wurf[1]) + " gewürfelt.")
+
+    def karteZeichnen(self, spieler):
         t = PrettyTable(["Feld", "Spieler"])
         for feld in Felder:
-            #print(feld.name, end=' ')
             spielfiguren = []
             for spielr in spieler:
                 if feld is spielr.aktuellePosition:
-                    #print(spielr.symbol, end=' ')
                     spielfiguren.append(spielr.symbol)
             t.add_row([feld.name, ", ".join(spielfiguren)])
         print(t)
 
     def assetsAnzeigen(self, geradeDran):
-        print("Dein Kapital ist: " + str(geradeDran.kapital) + "$.")
+        print("Dein Kapital ist: " + str(geradeDran.kapital) + "€.")
         # Grundbuch fragen, was dieser Spieler an Assets hat
 
 

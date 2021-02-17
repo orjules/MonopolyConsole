@@ -7,6 +7,7 @@ from .Wuerfel import wuerfeln
 from .Felder import Felder
 from ..Grundstuecke.Grundbuch import feldTypGeben
 
+
 class Spielleiter:
     darsteller = Darsteller()
     spieler = []
@@ -45,7 +46,8 @@ class Spielleiter:
             neuePos -= len(Felder)
         self.geradeDran.aktuellePosition = Felder(neuePos)
         # Neue Karte und Würfelergebnis darstellen
-        self.darsteller.karteZeichnen(self.spieler, ergebnis, self.geradeDran)
+        self.darsteller.spielerHatGewürfelt(ergebnis, self.geradeDran)
+        self.darsteller.karteZeichnen(self.spieler)
 
     def aktionenAufFeld(self):
         feldTyp = feldTypGeben(self.geradeDran.aktuellePosition)
@@ -53,3 +55,10 @@ class Spielleiter:
             print("Willst du " + feldTyp.name + " kaufen?")
         # je nach situation andere Ausgabe
         # self.darsteller.eingabeAbfragen("Du bist auf dem Feld " + feld.name + " gelandet. Was möchtest du tun?\n", {})
+
+    # def kartenAKtionMachen(self):
+
+
+    def setPosition(self, neuePos):
+        self.geradeDran.aktuellePosition = neuePos
+        self.darsteller.karteZeichnen(self.spieler)
