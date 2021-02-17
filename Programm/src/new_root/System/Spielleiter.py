@@ -5,7 +5,7 @@ from .Darsteller import Darsteller
 from .Spieler import Spieler
 from .Wuerfel import wuerfeln
 from .Felder import Felder
-
+from ..Grundstuecke.Grundbuch import feldTypGeben
 
 class Spielleiter:
     darsteller = Darsteller()
@@ -25,6 +25,7 @@ class Spielleiter:
                                                       "\n'z' um deinen Zug zu beenden.", {'w', 'ü', 'z'})
             if eingabe == 'w':
                 self.spielerBewegen()
+                self.aktionenAufFeld()
             elif eingabe == 'ü':
                 self.darsteller.assetsAnzeigen(self.geradeDran)
             elif eingabe == 'z':
@@ -46,3 +47,9 @@ class Spielleiter:
         # Neue Karte und Würfelergebnis darstellen
         self.darsteller.karteZeichnen(self.spieler, ergebnis, self.geradeDran)
 
+    def aktionenAufFeld(self):
+        feldTyp = feldTypGeben(self.geradeDran.aktuellePosition)
+        if feldTyp is not None:
+            print("Willst du " + feldTyp.name + " kaufen?")
+        # je nach situation andere Ausgabe
+        # self.darsteller.eingabeAbfragen("Du bist auf dem Feld " + feld.name + " gelandet. Was möchtest du tun?\n", {})

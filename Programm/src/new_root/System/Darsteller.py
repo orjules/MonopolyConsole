@@ -6,6 +6,7 @@ from .Wuerfel import wuerfeln
 from .Felder import Felder
 from prettytable import PrettyTable
 
+
 class Darsteller:
 
     def startSequenz(self):
@@ -74,3 +75,5 @@ class Darsteller:
     def assetsAnzeigen(self, geradeDran):
         print("Dein Kapital ist: " + str(geradeDran.kapital) + "$.")
         # Grundbuch fragen, was dieser Spieler an Assets hat
+
+

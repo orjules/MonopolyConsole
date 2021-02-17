@@ -1,4 +1,4 @@
-from System.Spielleiter import Spielleiter
+from MonopolyConsole.Programm.src.new_root.System.Spielleiter import Spielleiter
 
 spielleiter = Spielleiter()
 
