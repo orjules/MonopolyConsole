@@ -1,4 +1,3 @@
-from MonopolyConsole.Programm.src.new_root.System.Spielleiter import Spielleiter
+from new_root import Organisator
 
-spielleiter = Spielleiter()
-
+Organisator.gameLoop()

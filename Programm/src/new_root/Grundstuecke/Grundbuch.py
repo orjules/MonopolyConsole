@@ -19,13 +19,24 @@ alleFarbgruppen = {
     Farbgruppe(Farben.Blau, [alleGrundstuecke[3], alleGrundstuecke[4], alleGrundstuecke[5]])
 }
 
+grundbuch = {
+    alleGrundstuecke[0] : None,
+    alleGrundstuecke[1] : None,
+    alleGrundstuecke[2] : None,
+    alleGrundstuecke[3] : None,
+    alleGrundstuecke[4] : None,
+    alleGrundstuecke[5] : None,
+}
 
-def feldTypGeben(feld):
+
+def checkObGrundstueck(feld):
     # Nimmt Feld und gibt Grundstück oder Aktionsfeld zurück
     for grundstueck in alleGrundstuecke:
         if feld is grundstueck.feld:
             return grundstueck
     # hier können nur Straßen, Werke und Bahnhöfe zurückgegeben werden. Alles andere bringt None
 
+def checkBesitzer(grundstueck):
+    return grundbuch.get(grundstueck)
 
 

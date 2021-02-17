@@ -1,6 +1,7 @@
 import unittest
 from MonopolyConsole.Programm.src.new_root.System import Darsteller
 
+
 class DarstellerTest(unittest.TestCase):
 
     darsteller = Darsteller()
