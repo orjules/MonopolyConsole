@@ -21,11 +21,17 @@ class Spielleiter:
 
     def gameLoop(self):
         while(True):
-            self.inputVerarbeitung()
-            neuerIndex = self.spieler.index(self.geradeDran) + 1
-            if neuerIndex >= len(self.spieler):
-                neuerIndex -= len(self.spieler)
-            self.geradeDran = self.spieler[neuerIndex]
+            eingabe = self.darsteller.eingabeAbfragen("Was möchtest du tun?\n""'w' für würfeln\n'ü' für die Übersicht deines Kapitals"
+                                                      "\n'z' um deinen Zug zu beenden.", {'w', 'ü', 'z'})
+            if eingabe == 'w':
+                self.spielerBewegen()
+            elif eingabe == 'ü':
+                self.darsteller.assetsAnzeigen(self.geradeDran)
+            elif eingabe == 'z':
+                neuerIndex = self.spieler.index(self.geradeDran) + 1
+                if neuerIndex >= len(self.spieler):
+                    neuerIndex -= len(self.spieler)
+                self.geradeDran = self.spieler[neuerIndex]
 
 
     def spielerBewegen(self):
@@ -39,9 +45,4 @@ class Spielleiter:
         self.geradeDran.aktuellePosition = Felder(neuePos)
         # Neue Karte und Würfelergebnis darstellen
         self.darsteller.karteZeichnen(self.spieler, ergebnis, self.geradeDran)
-
-    def inputVerarbeitung(self):
-        eingabe = input()
-        if eingabe == 'w':
-            self.spielerBewegen()
 

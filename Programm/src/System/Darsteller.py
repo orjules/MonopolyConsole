@@ -70,3 +70,7 @@ class Darsteller:
                     spielfiguren.append(spielr.symbol)
             t.add_row([feld.name, ", ".join(spielfiguren)])
         print(t)
+
+    def assetsAnzeigen(self, geradeDran):
+        print("Dein Kapital ist: " + str(geradeDran.kapital) + "$.")
+        # Grundbuch fragen, was dieser Spieler an Assets hat
