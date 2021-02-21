@@ -14,6 +14,7 @@ from .System.Wuerfel import wuerfeln
 from .Grundstuecke.Grundbuch import checkObGrundstueck as Grundbuch_CheckObGrundstueck
 from .Grundstuecke.Grundbuch import checkBesitzer as Grundbuch_CheckBesitzer
 from .Grundstuecke.Grundstueck import Grundstueck
+from .Grundstuecke.Straße import Strasse
 
 # Funktion vom Random Karten Generator bzw Karten
 from .Karten.RKG import karteZiehen as RKG_KarteZiehen
@@ -41,7 +42,6 @@ def gameLoop():
 
         # Falls man auf eine Karte mit einer Aktion gekommen ist muss die erst ausgeführt werden
         aktionsFeld = aktionFeststellen()
-        print(type(aktionsFeld))
 
         # Nach dem Würfeln kann man so lange man will Dinge tun, kann aber erst den Zug beenden, wenn das erzwungene getan ist
         while not (beendet):
@@ -107,14 +107,14 @@ def aktionFeststellen():
 def aktionAufforderung(aktionsfeld):
     # Hier soll festgestellt werden auf welchem Feld man sich befindet und was man da tun kann
     ausgabe = ""
-    if type(aktionsfeld) is Grundstueck:
-        ausgabe = ausgabe + "Du bist auf " + aktionsfeld.name + " gelandet."
+    if isinstance(aktionsfeld, (Grundstueck, Strasse)):
+        ausgabe = ausgabe + "Du bist auf " + aktionsfeld.name + " gelandet. "
         if Grundbuch_CheckBesitzer(aktionsfeld) is None:
-            ausgabe = ausgabe + "Möchstest du es für " + str(aktionsfeld.grundstueckWert) + " kaufen?"
+            ausgabe = ausgabe + "Möchstest du es für " + str(aktionsfeld.grundstueckWert) + "€ kaufen?"
         else:
             pass
             # TODO Miete zahlen implementieren
-    elif type(aktionsfeld) is Ereigniskarte:
+    elif isinstance(aktionsfeld, Ereigniskarte):
         ausgabe = ausgabe + aktionsfeld.beschreibung
     return ausgabe
 

@@ -32,7 +32,7 @@ grundbuch = {
 def checkObGrundstueck(feld):
     # Nimmt Feld und gibt Grundstück oder Aktionsfeld zurück
     for grundstueck in alleGrundstuecke:
-        if feld is grundstueck.feld:
+        if grundstueck.feld.value == feld.value:
             return grundstueck
     # hier können nur Straßen, Werke und Bahnhöfe zurückgegeben werden. Alles andere bringt None
 

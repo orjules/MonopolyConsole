@@ -1,5 +1,6 @@
 ﻿from .Grundstueck import Grundstueck
 
+
 class Bahnhof(Grundstueck):
 
     def __init__(self, name, feld):

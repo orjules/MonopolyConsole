@@ -1,7 +1,7 @@
 ﻿from MonopolyConsole.Programm.src.new_root.Grundstuecke.Grundstueck import Grundstueck
 
 
-class Strasse(Grundstueck) :
+class Strasse(Grundstueck):
     farbe = None
     mieteAllein = None
     mieteEinHaus = None
