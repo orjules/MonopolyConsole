@@ -47,11 +47,14 @@ Häuser darauf stehen. Verwaltet auch den Verkauf oder Tausch von Grundstücken
 === 16.2.21
 - Leichte Planänderung um späteres Speichern zu erleichtern
 
+== 24.2.21
+- Erstellen des ersten Funktionierenden Prototyps
+- Möglich sind bewegen, Grundstücke kaufen und diese sowie das Kapital anzeigen
+
 == Nächste Schritte
-1. Spieler, Test-Spielfeld und Würfel erstellen um den Spieler auf dem Spielfeld zu bewegen, noch ohne die jeweilige Aktion auszuführen
-2. Über Los gehen und Geld bekommen können
-3. Grundstücke erstellen und die Fähigkeit diese zu kaufen implementieren
-4. Häuser und Hotels bauen
+1. Überblick gewinnen mit Dokumentation und Tests schreiben
+2. Karten implementieren (Für eigentliche Karten und spezielle Felder wie Los)
+3. Restliche Felder erstellen
+4. Eigene Grundstücke verwalten (Häuser und Hotels bauen, abbauen und Hypothek aufnehmen)
 5. Ins Gefängnis gehen (wenn auf das Feld kommen oder drei Pasche hintereinander) und wieder frei kommen können
-6. Ereigniskarten ziehen mit den jeweiligen Effekten
-7. Handel mit anderen Spielern
+6. Handel mit anderen Spielern
