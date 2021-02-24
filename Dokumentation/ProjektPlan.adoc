@@ -47,7 +47,7 @@ Häuser darauf stehen. Verwaltet auch den Verkauf oder Tausch von Grundstücken
 === 16.2.21
 - Leichte Planänderung um späteres Speichern zu erleichtern
 
-== 24.2.21
+=== 24.2.21
 - Erstellen des ersten Funktionierenden Prototyps
 - Möglich sind bewegen, Grundstücke kaufen und diese sowie das Kapital anzeigen
 
