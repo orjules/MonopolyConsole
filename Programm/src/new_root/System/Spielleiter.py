@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf 8 -*-
 
-from .Darsteller import startSequenz
 
 from .Spieler import Spieler
 from .Felder import Felder
@@ -12,7 +11,6 @@ class Spielleiter:
     geradeDran = None
 
     def __init__(self):
-        # spieler = self.darsteller.startSequenz()
         self.spieler = [Spieler("Spieler 1", '#'), Spieler("Spieler 2", '!'), Spieler("Spieler 3", '?')]
         self.geradeDran = self.spieler[0]
 
@@ -32,3 +30,6 @@ class Spielleiter:
         if neuerIndex >= len(self.spieler):
             neuerIndex -= len(self.spieler)
         self.geradeDran = self.spieler[neuerIndex]
+
+    def kapitalAendern(self, spieler, menge):
+        spieler.kapital += menge

@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf 8 -*-
 
+import os
+
 from .Spieler import Spieler
 from .Wuerfel import wuerfeln
 from .Felder import Felder
 from prettytable import PrettyTable
 from ..Grundstuecke.Grundbuch import alleGrundstueckeVon
+from ..Grundstuecke.Bahnhof import Bahnhof
+from .Spielleiter import Spielleiter
 
 
 def startSequenz():
@@ -65,7 +69,7 @@ def spielerHatGewürfelt(wurf, geradeDran):
 
 
 def karteZeichnen(spieler):
-    # TODO Console löschen
+    neueSeite()
     t = PrettyTable(["Feld", "Spieler"])
     for feld in Felder:
         spielfiguren = []
@@ -77,9 +81,7 @@ def karteZeichnen(spieler):
 
 
 def assetsAnzeigen(geradeDran):
-    # TODO Console löschen
-    print("Dein Kapital ist: " + str(geradeDran.kapital) + "€.")
-    # Grundbuch fragen, was dieser Spieler an Assets hat
+    neueSeite()
     grundstuecke = alleGrundstueckeVon(geradeDran)
     if len(grundstuecke) != 0:
         t = PrettyTable(["Grundstück", "Wert", "Häuseranzahl", "Hat Hotel"])
@@ -89,5 +91,26 @@ def assetsAnzeigen(geradeDran):
                 hatHotel = "Ja"
             t.add_row([grundstueck.name, grundstueck.grundstueckWert, grundstueck.anzahlHaus, hatHotel])
         print(t)
+        print("Dein Kapital ist: " + str(geradeDran.kapital) + "€.")
     else:
+        print("Dein Kapital ist: " + str(geradeDran.kapital) + "€.")
         print("Du besitzt keine Grundstücke.")
+    if eingabeAbfragen("'z' um zurück zu gehen.", 'z') == 'z':
+        neueSeite()
+        karteZeichnen(Spielleiter.spieler)
+
+
+def kaufBestaetigung(grundstueck, spieler):
+    karteZeichnen(Spielleiter.spieler)
+    prononem = "die "
+    if type(grundstueck) is Bahnhof:
+        prononem = "den "
+    print("Du hast " + prononem + str(grundstueck.name) + " gekauft. Dein neuer Kontostand ist: " +
+          str(spieler.kapital) + "€.")
+
+
+def neueSeite():
+    os.system('cls' if os.name =='nt' else 'clear')
+
+def umbruch():
+    print("===========================================================")

@@ -6,6 +6,8 @@ from .System.Darsteller import eingabeAbfragen as Darsteller_EingabeFragen
 from .System.Darsteller import spielerHatGewürfelt as Darsteller_geworfen
 from .System.Darsteller import karteZeichnen as Darsteller_KarteZeichnen
 from .System.Darsteller import assetsAnzeigen as Darsteller_Assets
+from .System.Darsteller import kaufBestaetigung as Darsteller_KaufBestaetigung
+from .System.Darsteller import umbruch as Darsteller_Umbruch
 
 # Funktion vom Würfel
 from .System.Wuerfel import wuerfeln
@@ -46,6 +48,7 @@ def gameLoop():
 
         # Nach dem Würfeln kann man so lange man will Dinge tun, kann aber erst den Zug beenden, wenn das erzwungene getan ist
         while not (beendet):
+            Darsteller_Umbruch()
             frage = ""
             erlaubteEingabe = []
 
@@ -73,6 +76,7 @@ def gameLoop():
 
             # Eingabe verarbeiten
             if eingabe == 'z':
+                spielleiter.weiter()
                 beendet = True
             elif eingabe == 'ü':
                 Darsteller_Assets(spielleiter.geradeDran)
@@ -83,12 +87,13 @@ def gameLoop():
                     # gehe ins Gefängnis
             elif eingabe == 'a':
                 aktionenAufFeld(aktionsFeld)
+                fertig = True
 
 def laufen():
     wurf = wuerfeln()
     spielleiter.spielerBewegen(wurf[0] + wurf[1])
-    Darsteller_geworfen(wurf, spielleiter.geradeDran)
     Darsteller_KarteZeichnen(spielleiter.spieler)
+    Darsteller_geworfen(wurf, spielleiter.geradeDran)
     if wurf[0] == wurf[1]:
         return True
     else:
@@ -111,9 +116,12 @@ def aktionAufforderung(aktionsfeld):
     # Hier soll festgestellt werden auf welchem Feld man sich befindet und was man da tun kann
     ausgabe = ""
     if isinstance(aktionsfeld, (Grundstueck, Strasse)):
-        ausgabe = ausgabe + "Du bist auf " + aktionsfeld.name + " gelandet. "
+        pronomen = ("dem ", "ihn ")
+        if type(aktionsfeld) is Strasse:
+            pronomen = ("der ", "sie ")
+        ausgabe = ausgabe + "Du bist auf " + pronomen[0] + aktionsfeld.name + " gelandet. "
         if Grundbuch_CheckBesitzer(aktionsfeld) is None:
-            ausgabe = ausgabe + "Möchstest du es für " + str(aktionsfeld.grundstueckWert) + "€ kaufen?"
+            ausgabe = ausgabe + "Möchstest du " + pronomen[1] + "für " + str(aktionsfeld.grundstueckWert) + "€ kaufen?"
             ausgabe = ausgabe + "\nDein momentaner Kontostand ist " + str(spielleiter.geradeDran.kapital) + "€."
             if spielleiter.geradeDran.kapital >= aktionsfeld.grundstueckWert:
                 ausgabe = ausgabe +"\n'a' um das Grundstück zu kaufen."
@@ -131,6 +139,8 @@ def aktionenAufFeld(aktionsfeld):
         if Grundbuch_CheckBesitzer(aktionsfeld) is None:
             if spielleiter.geradeDran.kapital >= aktionsfeld.grundstueckWert:
                 Grundbuch_Uebertragen(aktionsfeld, None, spielleiter.geradeDran)
+                spielleiter.kapitalAendern(spielleiter.geradeDran, -aktionsfeld.grundstueckWert)
+                Darsteller_KaufBestaetigung(aktionsfeld, spielleiter.geradeDran)
         else:
             pass
     # aktionsfeld.aktionMachen(spielleiter.geradeDran)
