@@ -5,6 +5,7 @@ from .Spieler import Spieler
 from .Wuerfel import wuerfeln
 from .Felder import Felder
 from prettytable import PrettyTable
+from ..Grundstuecke.Grundbuch import alleGrundstueckeVon
 
 
 def startSequenz():
@@ -79,3 +80,14 @@ def assetsAnzeigen(geradeDran):
     # TODO Console löschen
     print("Dein Kapital ist: " + str(geradeDran.kapital) + "€.")
     # Grundbuch fragen, was dieser Spieler an Assets hat
+    grundstuecke = alleGrundstueckeVon(geradeDran)
+    if len(grundstuecke) != 0:
+        t = PrettyTable(["Grundstück", "Wert", "Häuseranzahl", "Hat Hotel"])
+        for grundstueck in grundstuecke:
+            hatHotel = "Nein"
+            if grundstueck.hatHotel:
+                hatHotel = "Ja"
+            t.add_row([grundstueck.name, grundstueck.grundstueckWert, grundstueck.anzahlHaus, hatHotel])
+        print(t)
+    else:
+        print("Du besitzt keine Grundstücke.")

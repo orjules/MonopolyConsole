@@ -39,4 +39,17 @@ def checkObGrundstueck(feld):
 def checkBesitzer(grundstueck):
     return grundbuch.get(grundstueck)
 
+def uebertragen(grundstueck, von, an):
+    if von is None:
+        if grundstueck in grundbuch:
+            grundbuch[grundstueck] = an
+    else:
+        pass
+        #TODO Übertrag von einer Person zur anderen implementieren
 
+def alleGrundstueckeVon(spieler):
+    ausgabe = []
+    for besitzer in grundbuch.values():
+        if besitzer is spieler:
+            ausgabe.append(list(grundbuch.keys())[list(grundbuch.values()).index(spieler)])
+    return ausgabe

@@ -13,6 +13,7 @@ from .System.Wuerfel import wuerfeln
 # Funktion vom Grundbuch bzw Grundstück
 from .Grundstuecke.Grundbuch import checkObGrundstueck as Grundbuch_CheckObGrundstueck
 from .Grundstuecke.Grundbuch import checkBesitzer as Grundbuch_CheckBesitzer
+from .Grundstuecke.Grundbuch import uebertragen as Grundbuch_Uebertragen
 from .Grundstuecke.Grundstueck import Grundstueck
 from .Grundstuecke.Straße import Strasse
 
@@ -80,6 +81,8 @@ def gameLoop():
                 if anzahlPasche == 3:
                     pass
                     # gehe ins Gefängnis
+            elif eingabe == 'a':
+                aktionenAufFeld(aktionsFeld)
 
 def laufen():
     wurf = wuerfeln()
@@ -111,6 +114,11 @@ def aktionAufforderung(aktionsfeld):
         ausgabe = ausgabe + "Du bist auf " + aktionsfeld.name + " gelandet. "
         if Grundbuch_CheckBesitzer(aktionsfeld) is None:
             ausgabe = ausgabe + "Möchstest du es für " + str(aktionsfeld.grundstueckWert) + "€ kaufen?"
+            ausgabe = ausgabe + "\nDein momentaner Kontostand ist " + str(spielleiter.geradeDran.kapital) + "€."
+            if spielleiter.geradeDran.kapital >= aktionsfeld.grundstueckWert:
+                ausgabe = ausgabe +"\n'a' um das Grundstück zu kaufen."
+            else:
+                ausgabe = ausgabe + "\nDu hast nicht genug Geld um das Grundstück zu kaufen."
         else:
             pass
             # TODO Miete zahlen implementieren
@@ -118,7 +126,12 @@ def aktionAufforderung(aktionsfeld):
         ausgabe = ausgabe + aktionsfeld.beschreibung
     return ausgabe
 
-def aktionenAufFeld():
-    pass
+def aktionenAufFeld(aktionsfeld):
+    if isinstance(aktionsfeld, (Grundstueck, Strasse)):
+        if Grundbuch_CheckBesitzer(aktionsfeld) is None:
+            if spielleiter.geradeDran.kapital >= aktionsfeld.grundstueckWert:
+                Grundbuch_Uebertragen(aktionsfeld, None, spielleiter.geradeDran)
+        else:
+            pass
     # aktionsfeld.aktionMachen(spielleiter.geradeDran)
     # Je nach Feld eine andere Aktion ausführen
