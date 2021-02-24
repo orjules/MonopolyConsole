@@ -1,0 +1,2 @@
+﻿class Ereigniskarte:
+    beschreibung = None

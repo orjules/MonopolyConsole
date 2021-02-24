@@ -22,10 +22,30 @@ Dann soll das Monopoly nach den Standartregeln gespielt werden können, inklusiv
 == Erster Entwurf
 image::./Entwurf/MonopolyEntwurf1.svg[Mit MagicDraw habe ich einen ersten Entwurf für das Programm erstellt.]
 
+=== Beschreibung
+Drei Komponenten:
+
+- System
+* Würfel - Gibt auf Befehl die beiden ergebnisse der zwei sechsseitigen Würfel
+* Darsteller - Ist alleinig für den Output auf die Konsole verantwortlich
+* SpielerManager - Bekommt die Eingaben der Spieler und leitet diese Weiter
+* Spieler - speichern die Daten, der Spieler wie Geld und Karten
+- Grundstücke
+* Grundstück - Oberklasse für die Verschiedenen Arten von Grundstücken. Diese speichern jeweils die Werte,
+die dieses Grundstück immer haben wird, wie z.B. Kaufpreis oder Miete.
+* Grundbuch - Verwaltet die verschiedenen Grundstücke. Hier steht, welchem Spieler welchen Grundstück gehört und wie viele
+Häuser darauf stehen. Verwaltet auch den Verkauf oder Tausch von Grundstücken
+- Karten
+* Karte - Oberklasse der verschiedenen Karten, die jeweils die Regeln speichern, für wenn diese Karte gezogen wird.
+* Kartenverwaltung - Zieht eine zufällige Karte.
+
 == Fortschritt
 === 1.1.21
 - Ersten Entwurf erstellt
 - Mit Python experimentiert
+
+=== 16.2.21
+- Leichte Planänderung um späteres Speichern zu erleichtern
 
 == Nächste Schritte
 1. Spieler, Test-Spielfeld und Würfel erstellen um den Spieler auf dem Spielfeld zu bewegen, noch ohne die jeweilige Aktion auszuführen
