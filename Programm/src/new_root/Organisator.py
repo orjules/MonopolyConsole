@@ -1,5 +1,5 @@
 ﻿# Der eine Spielleiter
-from MonopolyConsole.Programm.src.new_root.System.Spielleiter import Spielleiter
+from .System import Spielleiter as spielleiter
 
 # Funktionen vom Darsteller
 from .System.Darsteller import eingabeAbfragen as Darsteller_EingabeFragen
@@ -23,7 +23,6 @@ from .Grundstuecke.Straße import Strasse
 from .Karten.RKG import karteZiehen as RKG_KarteZiehen
 from .Karten.Ereigniskarte import Ereigniskarte
 
-spielleiter = Spielleiter()
 
 def gameLoop():
     while (True):
@@ -33,7 +32,7 @@ def gameLoop():
         anzahlPasche = 0
 
         # Als erstes wird die Karte gezeichnet
-        Darsteller_KarteZeichnen(spielleiter.spieler)
+        Darsteller_KarteZeichnen()
 
         # Es wird so lange nach einer Eingabe verlangt, bis gewürfelt wird
         if spielleiter.geradeDran.istImGefaengnis:
@@ -92,7 +91,7 @@ def gameLoop():
 def laufen():
     wurf = wuerfeln()
     spielleiter.spielerBewegen(wurf[0] + wurf[1])
-    Darsteller_KarteZeichnen(spielleiter.spieler)
+    Darsteller_KarteZeichnen()
     Darsteller_geworfen(wurf, spielleiter.geradeDran)
     if wurf[0] == wurf[1]:
         return True

@@ -5,31 +5,32 @@
 from .Spieler import Spieler
 from .Felder import Felder
 
-
-class Spielleiter:
-    spieler = []
-    geradeDran = None
-
-    def __init__(self):
-        self.spieler = [Spieler("Spieler 1", '#'), Spieler("Spieler 2", '!'), Spieler("Spieler 3", '?')]
-        self.geradeDran = self.spieler[0]
-
-    def spielerBewegen(self, zusammen):
-        neuePos = self.geradeDran.aktuellePosition.value + zusammen
-        if neuePos > len(Felder):
-            neuePos -= len(Felder)
-        self.geradeDran.aktuellePosition = Felder(neuePos)
+spieler = [Spieler("Spieler 1", '#'), Spieler("Spieler 2", '!'), Spieler("Spieler 3", '?')]
+geradeDran = spieler[0]
 
 
-    def setPosition(self, neuePos):
-        self.geradeDran.aktuellePosition = neuePos
-        self.darsteller.karteZeichnen(self.spieler)
+def spielerBewegen(zusammen):
+    global spieler
+    global geradeDran
+    neuePos = geradeDran.aktuellePosition.value + zusammen
+    if neuePos > len(Felder):
+        neuePos -= len(Felder)
+    geradeDran.aktuellePosition = Felder(neuePos)
 
-    def weiter(self):
-        neuerIndex = self.spieler.index(self.geradeDran) + 1
-        if neuerIndex >= len(self.spieler):
-            neuerIndex -= len(self.spieler)
-        self.geradeDran = self.spieler[neuerIndex]
 
-    def kapitalAendern(self, spieler, menge):
-        spieler.kapital += menge
+def setPosition(neuePos):
+    global geradeDran
+    geradeDran.aktuellePosition = neuePos
+
+
+def weiter():
+    global geradeDran
+    global spieler
+    neuerIndex = spieler.index(geradeDran) + 1
+    if neuerIndex >= len(spieler):
+        neuerIndex -= len(spieler)
+    geradeDran = spieler[neuerIndex]
+
+
+def kapitalAendern(spieler, menge):
+    spieler.kapital += menge

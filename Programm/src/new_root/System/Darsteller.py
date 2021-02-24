@@ -9,7 +9,8 @@ from .Felder import Felder
 from prettytable import PrettyTable
 from ..Grundstuecke.Grundbuch import alleGrundstueckeVon
 from ..Grundstuecke.Bahnhof import Bahnhof
-from .Spielleiter import Spielleiter
+from .Spielleiter import spieler
+
 
 
 def startSequenz():
@@ -68,7 +69,7 @@ def spielerHatGewürfelt(wurf, geradeDran):
             geradeDran.name + " (" + geradeDran.symbol + ") hat " + str(wurf[0]) + ", " + str(wurf[1]) + " gewürfelt.")
 
 
-def karteZeichnen(spieler):
+def karteZeichnen():
     neueSeite()
     t = PrettyTable(["Feld", "Spieler"])
     for feld in Felder:
@@ -84,12 +85,13 @@ def assetsAnzeigen(geradeDran):
     neueSeite()
     grundstuecke = alleGrundstueckeVon(geradeDran)
     if len(grundstuecke) != 0:
-        t = PrettyTable(["Grundstück", "Wert", "Häuseranzahl", "Hat Hotel"])
+        t = PrettyTable(["Grundstück", "Wert", "Häuseranzahl"])
         for grundstueck in grundstuecke:
-            hatHotel = "Nein"
-            if grundstueck.hatHotel:
-                hatHotel = "Ja"
-            t.add_row([grundstueck.name, grundstueck.grundstueckWert, grundstueck.anzahlHaus, hatHotel])
+            if type(grundstueck) is Bahnhof:
+                anzahlHaus = "Ist ein Bahnhof"
+            else:
+                anzahlHaus = grundstueck.anzahlHaus
+            t.add_row([grundstueck.name, grundstueck.grundstueckWert, anzahlHaus])
         print(t)
         print("Dein Kapital ist: " + str(geradeDran.kapital) + "€.")
     else:
@@ -97,16 +99,16 @@ def assetsAnzeigen(geradeDran):
         print("Du besitzt keine Grundstücke.")
     if eingabeAbfragen("'z' um zurück zu gehen.", 'z') == 'z':
         neueSeite()
-        karteZeichnen(Spielleiter.spieler)
+        karteZeichnen()
 
 
-def kaufBestaetigung(grundstueck, spieler):
-    karteZeichnen(Spielleiter.spieler)
+def kaufBestaetigung(grundstueck, einSpieler):
+    karteZeichnen()
     prononem = "die "
     if type(grundstueck) is Bahnhof:
         prononem = "den "
     print("Du hast " + prononem + str(grundstueck.name) + " gekauft. Dein neuer Kontostand ist: " +
-          str(spieler.kapital) + "€.")
+          str(einSpieler.kapital) + "€.")
 
 
 def neueSeite():
