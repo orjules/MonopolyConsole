@@ -20,7 +20,7 @@ Dann soll das Monopoly nach den Standartregeln gespielt werden können, inklusiv
 - Ins Gefängnis gehen und rauskommen
 
 == Erster Entwurf
-image::./Entwurf/MonopolyEntwurf1.svg[Mit MagicDraw habe ich einen ersten Entwurf für das Programm erstellt.]
+image::./Entwurf/ZweiterEntwurf.svg[Mit StarUML habe ich einen zweiten Entwurf für das Programm erstellt.]
 
 === Beschreibung
 Drei Komponenten:
